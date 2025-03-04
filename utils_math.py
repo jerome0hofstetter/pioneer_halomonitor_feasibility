@@ -1,14 +1,8 @@
-import ROOT
 import numpy as np
 from lmfit import Model
 import glob
 import os
 from scipy.signal import savgol_filter
-
-PIONEER_FOLDER = "/home/akumashisen/PIONEER"
-
-ROOT.gSystem.Load(f"{PIONEER_FOLDER}/main/install/lib/libPiRootDict.so")
-ROOT.gSystem.Load(f"{PIONEER_FOLDER}/main/install/lib/libPiRootDict.rootmap")
 
 def get_pdid_color_map():
     """
@@ -85,15 +79,6 @@ def get_root_files(run_id,key="run", folder='output'):
     pattern = get_file_pattern(run_id,key=key,folder=folder)
     return glob.glob(pattern)
 
-def create_root_tchain(run_id,key="run",treename="sim"):
-    """
-    given run id, potential key and potential treename return a root.TChain instance with all corresponding runfiles
-    """
-    root_files = get_root_files(run_id,key=key)
-    chain = ROOT.TChain(treename)  
-    for file_name in root_files:
-        chain.Add(file_name)
-    return chain
 #fitting cone
 def cone_model(x, y, a, x0,y0,z0):
     return a * np.sqrt((x-x0)**2 + (y-y0)**2) + z0
