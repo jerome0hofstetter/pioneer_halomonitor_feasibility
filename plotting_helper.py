@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import CheckButtons,TextBox,Button,RadioButtons
-from utils import *
+from utils_math import *
 
 
 def plot_histogram_radius(ax,xpos,ypos,zpos,id,show_id,radius_cutoff=0,bin_amount=200,aggreg=True,rad_normalized=True,peak_scaling=True,smooth=False):
