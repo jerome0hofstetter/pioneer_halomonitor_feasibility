@@ -1,0 +1,203 @@
+{
+    "debug":false,
+    "filename":"default_LXe",
+    "ScintScale":0.1,
+    "mother":{
+        "material":"air",
+        "xWidth":2000, 
+        "yWidth":2000,
+        "zWidth":11000
+    },
+     "target":{
+        "DoubleSided": false, 
+        "xPos": 0.0,
+        "yPos": 0.0,
+        "zPos": 0.0,
+        "nLayers"    : 48,
+        "layerStagger":0.03,
+        "stripWidth": 0.02, 
+        "stripLength": 2.0, 
+        "stripThickness":0.012,
+        "nStrips"    : 100,
+        "stripMaterial": "Silicon",
+        "electrodeWidth": 0.01,
+        "electrodeMaterial":"Aluminum",
+        "instrumentWithTILGAD":false,
+        "TILGADTrenchWidth":0.0005,
+        "backingAndElectrodeThickness":0.0002,
+        "backingMaterial":"Aluminum",
+        "hvThickness":0.0015,
+        "hvLengthPastSensor":0.04,
+        "hvMaterial":"Kapton",
+        "makeGuard":true,
+        "guardWidth":0.04,
+        "guardMaterial":"Silicon",
+        "layerBuffer" : 0.0025, 
+        "debug":false,
+        "passivationLayer" : false,
+        "passivationThickness" : 0.0002,
+        "makeHVSupportHoles" : true
+    }, 
+    "readouts":{
+        "mode"               : "upstream",
+        "useGhosts"          : false,
+        "alpha"              : 135,
+        "cableLen"           : 5,
+        "connectorLen"       : 5,
+        "cableMaterial"  : {
+            "name"    : "atarCable",
+            "g/cm2"   : 0.307,
+            "composition" : {
+                "Aluminum" : 0.45,
+                "Kapton" : 0.55
+            }
+        }
+    },
+    "supports":{
+        "supportMaterial":"CarbonFiber",
+        "supportRadius":0.01,
+        "straightSupportLength":1.2,
+        "straightSupportEdgeDistance":0.03,
+        "exitSupportAngle": 35,
+        "exitSupportLength": 10
+    },
+    "calorimeter":{
+        "debug":false,
+        "useGhosts":false,
+        "geometry":"Pacman_keyhole",
+        "rIn": 15,
+        "rActive": 53.4,
+        "alpha": 35,
+        "vacuumThickness": 2.0,
+        "shellThickness": 2.0,
+        "coneInnerThickness": 0.05,
+        "coneOuterThickness": 0.02,
+        "coneVacuumThickness": 2.0,
+        "windowThickness": 0.02,
+        "innerWindowThickness": 0.05,
+        "outerWindowThickness": 0.02,
+        "activeMaterial": "LXe",
+        "vacuumMaterial": "Air",
+        "shellMaterial": "Aluminum",
+        "windowMaterial": "Ti_6Al_4V",
+        "innerWindowMaterial": "Aluminum",
+        "outerWindowMaterial": "Ti_6Al_4V",
+        "pmtFillerMaterial": "Aluminum",
+        "sipmFillerMaterial": "KaptonCable",
+        "sipmFillerMaterialPhotosensor": "KaptonCable_photosensor",
+        "pmtThickness": 3.0,
+        "Nsipms": 1000,
+        "NinnerSipms": 600,
+        "NconeSipms": 100,
+        "Npmts": 600,
+        "sipmSize": 4.85,
+        "sipmThickness": 0.06,
+        "sipmWindowThickness" : 0.25,
+        "sipmMaterial" : "Silicon_photosensor",
+        "sipmWindowMaterial" : "Quartz"
+    },
+    "trackers":{
+        "type": "urwell",
+        "mode": "pacman",
+        "xPos": 0.0,
+        "yPos": 0.0,
+        "zPos": 0.0,
+        "trackers":[
+            {
+                "debug":false,        
+                "alpha":90,
+                "rMin": 8.0,
+                "layerMaterials":["Copper","Honeycomb","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Carbon","Kapton","Copper","uRWELLGas","Copper","uRWELLGas","Copper","Kapton", "Carbon", "EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Honeycomb","Copper"],
+                "layerThickness":[0.0017,0.16,0.0017,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.000001,0.005,0.0005,0.2,0.0005,0.2,0.0005,0.005,0.000001,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.0017, 0.16,0.0017 ],
+                "sensitive":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+            }
+        ]
+    },
+    "dtar": {
+        "material":          "Silicon",
+        "matchATAR":         true,
+        "zWidth":            0.3,
+        "makeSupportHoles" : true
+    },
+    "upstream":{
+        "detectors":{
+            "Spark" : {
+                "type" : "halo_monitor",
+                "debug" : true,
+                "layers" : [
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true }
+                ]
+            }
+        }
+    },
+    "no_magnet": {
+        "magnets": [{
+           "debug": false,
+           "FieldGradient": -0.9899193091738064,
+           "innerMaterial": "air",
+           "outerMaterial": "Iron",
+           "xPos": 0.0,
+           "yPos": 0.0,
+           "zPos": -235.0,
+           "innerRadius": 12.5,
+           "outerRadius": 35,
+           "zLength": 40.0
+        }, {
+           "debug": false,
+           "FieldGradient": 2.2189968979482377,
+           "innerMaterial": "air",
+           "outerMaterial": "Iron",
+           "xPos": 0.0,
+           "yPos": 0.0,
+           "zPos": -185.0,
+           "innerRadius": 12.5,
+           "outerRadius": 35,
+           "zLength": 40.0
+        }, {
+           "debug": false,
+           "FieldGradient": -2.902588055049679,
+           "innerMaterial": "air",
+           "outerMaterial": "Iron",
+           "xPos": 0.0,
+           "yPos": 0.0,
+           "zPos": -95.0,
+           "innerRadius": 12.5,
+           "outerRadius": 35,
+           "zLength": 40.0
+        }, {
+           "debug": false,
+           "FieldGradient": 2.90258805497481,
+           "innerMaterial": "air",
+           "outerMaterial": "Iron",
+           "xPos": 0.0,
+           "yPos": 0.0,
+           "zPos": -45.0,
+           "innerRadius": 12.5,
+           "outerRadius": 35,
+           "zLength": 40.0
+        }]
+    },
+    "no_collimator": {
+        "debug": false,
+        "collimatorMaterial": "Iron",
+        "holeMaterial": "air",
+        "xPos": 0.0,
+        "yPos": 0.0,
+        "zPos": -140.0,
+        "xLength": 100.0,
+        "yLength": 100.0,
+        "zLength": 5.0,
+        "xHolePos": 0,
+        "yHolePos": 0,
+        "xHoleLength": 1.0,
+        "yHoleLength": 1.0
+    }
+}

@@ -1,0 +1,128 @@
+{
+    "debug":false,
+    "filename":"default_lyso",
+    "mother":{
+        "material":"air",
+        "xWidth":2000, 
+        "yWidth":2000,
+        "zWidth":11000
+    },
+    "target":{
+        "DoubleSided": false, 
+        "xPos": 0.0,
+        "yPos": 0.0,
+        "zPos": 0.0,
+        "nLayers"    : 48,
+        "layerStagger":0.03,
+        "stripWidth": 0.02, 
+        "stripLength": 2.0, 
+        "stripThickness":0.012,
+        "nStrips"    : 100,
+        "stripMaterial": "Silicon",
+        "electrodeWidth": 0.01,
+        "electrodeMaterial":"Aluminum",
+        "instrumentWithTILGAD":false,
+        "TILGADTrenchWidth":0.0005,
+        "backingAndElectrodeThickness":0.0002,
+        "backingMaterial":"Aluminum",
+        "hvThickness":0.0015,
+        "hvLengthPastSensor":0.04,
+        "hvMaterial":"Kapton",
+        "makeGuard":true,
+        "guardWidth":0.04,
+        "guardMaterial":"Silicon",
+        "layerBuffer" : 0.0025, 
+        "debug":false,
+        "passivationLayer" : false,
+        "passivationThickness" : 0.0002,
+        "makeHVSupportHoles" : true
+    },
+    "dtar": {
+        "material":          "Silicon",
+        "matchATAR":         true,
+        "zWidth":            0.3,
+        "makeSupportHoles" : true
+    },
+    "readouts":{
+        "mode": "boxes"
+    },
+    "supports":{
+        "supportMaterial":"CarbonFiber",
+        "supportRadius":0.01,
+        "straightSupportLength":1.2,
+        "straightSupportEdgeDistance":0.03,
+        "exitSupportAngle": 35,
+        "exitSupportLength": 10
+    },
+    "trackers":{
+        "type": "urwell",
+        "mode": "pacman",
+        "xPos": 0.0,
+        "yPos": 0.0,
+        "zPos": 0.0,
+        "trackers":[
+            {
+                "debug":false,        
+                "alpha":90,
+                "rMin": 8.8,
+                "layerMaterials":["Copper","Honeycomb","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Carbon","Kapton","Copper","uRWELLGas","Copper","uRWELLGas","Copper","Kapton", "Carbon", "EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Kapton","Copper","EM528","Copper","Honeycomb","Copper"],
+                "layerThickness":[0.0017,0.16,0.0017,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.000001,0.005,0.0005,0.2,0.0005,0.2,0.0005,0.005,0.000001,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.0009,0.0025,0.0009,0.0028,0.0017, 0.16,0.0017 ],
+                "sensitive":[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+            }
+        ]
+    },
+    "upstream":{
+        "detectors":{
+            "Spark" : {
+                "type" : "halo_monitor",
+                "layers" : [
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true },
+                    {"width": 0.5, "mat" : "Aluminum",            "active" : false},
+                    {"width": 0.1, "mat" : "PlasticScintillator", "active" : true }
+                ]
+            }
+        },
+        "ancillary" : {
+            "beam" : {
+                "type" : "veto",
+                "material" : "air",
+                "z" :[-1, -10],
+                "rmin" : [0, 0],
+                "rmax" : [1.477, 6.67]
+            },
+            "fid" : {
+                "type" : "veto",
+                "material" : "air",
+                "phiwidth" : 90,
+                "offset" : [-1, -1, 0],
+                "z" :[-5.03459778706368, -7],
+                "rmin" : [6, 8.34227514815947],
+                "rmax" : [8.34227514815947, 8.34227514815947]
+            }
+        }
+    },
+    "calorimeter":{
+        "debug":false,
+        "geometry":"NewCrystals",
+        "crystalFile":"geometry/examples/lyso_crystal_files/polyhedronisme-C500du6I.obj",
+        "rMin": 15,
+        "length": 21,
+        "alpha": 40,
+        "activeMaterial": "LYSO",
+        "makeWrapping":true,
+        "wrappingThickness":0.0025,
+        "wrappingMaterial":"Tedlar",
+        "activeWrapping":false,
+        "makeSipm":true,
+        "trimFactor":0.999,
+        "sipmSize": 1.0,
+        "sipmThickness": 0.05,
+        "sipmMaterial" : "Silicon_photosensor"
+    }
+}

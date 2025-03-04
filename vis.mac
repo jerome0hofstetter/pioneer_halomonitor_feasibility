@@ -1,0 +1,190 @@
+
+# print macro commands on screen
+/control/verbose 0
+
+###################################################################
+# geometry must be specified before /run/initialize               # 
+/geometry/source geo_files/detector_offshoot.gdml
+
+# Configure magnetic fields
+# /magfield/scalingfactor          1
+
+# End of geometry configuration                                   # 
+###################################################################
+
+###################################################################
+# Configuration of the physics to be used                         # 
+
+/Physics/SelectList QGSP_BERT_EM4
+/process/had/verbose 0
+/process/em/verbose 0
+
+# Add optical physics.
+#/Physics/AddOptics
+#/process/optical/verbose 1
+#/process/optical/processActivation Cerenkov false
+#/process/optical/processActivation Scintillation false
+#/process/optical/processActivation OpAbsorption true
+#/process/optical/processActivation OpRayleigh true
+#/process/optical/processActivation OpMieHG true
+#/process/optical/processActivation OpBoundary true
+#/process/optical/processActivation OpWLS true
+#/process/optical/processActivation OpWLS2 true
+#
+#/process/optical/scintillation/verbose 1
+#/process/optical/scintillation/setByParticleType false
+#/process/optical/scintillation/setTrackInfo true
+#/process/optical/scintillation/setFiniteRiseTime false
+#/process/optical/scintillation/setStackPhotons true
+#/process/optical/scintillation/setTrackSecondariesFirst true
+
+# Decay mode selection
+#/decay/all
+#/decay/pimunu
+#/decay/rad_muon
+#/decay/pienu
+#/decay/pienug
+#/decay/rad_michel
+#/decay/rad_michel_rad_muon
+#/decay/pibeta
+
+# Cap muon lifetime to enhance probability of muon decay in flight
+# /decay/mulifetimecap  50 ps
+
+# End of physics configuration                                    # 
+###################################################################
+
+###################################################################
+# Configuration of the output to be written                       # 
+
+# path to output file. "#RUN#" will be replaced by the run ID
+/output/FileName ./run#RUN#
+
+# Switching on/off branches in the output TTree
+/output/SaveInit         true
+/output/SaveTrack        false
+/output/SaveCalo         true
+/output/SaveAtar         true
+/output/SaveSipm         true
+
+
+# End of output configuration                                     # 
+###################################################################
+
+#==================================================================
+# Initialise the run 
+/run/initialize
+
+# check physics processes and particles.
+# Beware, output is somewhat messy in multithreaded mode
+#/process/list
+#/particle/list
+#/geometry/list
+
+# Configure pion beam
+/gen/select beam
+
+# Select beam phasespace definition
+# Options: pre-built, flexible
+/gen/beam pre-built
+
+# Beam contaminations (0 - 1.00)
+/gen/beam/muons         0
+/gen/beam/positrons     0
+
+# Beam parameters
+# General beam parameters
+#/gen/beam/momentum             65 MeV
+#/gen/beam/momsigma            1.4 MeV
+#/gen/beam/xmean                 0 mm
+#/gen/beam/ymean                 0 mm
+#/gen/beam/zpos              -1000 mm
+# Select gaussian beam and set mode
+# Options are (gaus, shape) for shape
+#/gen/beam/shape                   cyl
+
+# Cylindrical beam parameters
+#/gen/beam/cyl/rmax             10 mm
+
+# Gaussian beam parameters
+#/gen/beam/gaus/mode               sinit_emittance
+#/gen/beam/gaus/zoff             0 mm
+#/gen/beam/gaus/xinitsigma      91 mm
+#/gen/beam/gaus/yinitsigma      54 mm
+#/gen/beam/gaus/xemittance    0.62 mm
+#/gen/beam/gaus/yemittance    0.23 mm
+#/gen/beam/gaus/xwaistsigma    6.8 mm
+#/gen/beam/gaus/ywaistsigma    4.3 mm
+#/gen/beam/gaus/xprimesigma   0.09 
+#/gen/beam/gaus/yprimesigma   0.05  
+
+#/gen/select signal
+#/gen/signal/momentum    70 MeV
+#/gen/signal/momsigma     1 MeV
+#/gen/signal/thetaMin    60 deg
+#/gen/signal/thetaMax   120 deg
+#/gen/signal/phiMin       0 deg
+#/gen/signal/phiMax     360 deg
+#/gen/signal/sigmaX       2 mm
+#/gen/signal/sigmaY       2 mm
+#/gen/signal/sigmaZ       2 mm
+
+# configure the generic particle source
+#/gps/particle pi+
+#/gps/energy 0.0 MeV
+#/gps/pos/type Volume
+#/gps/pos/shape Para
+#/gps/pos/centre 0 0 0 mm
+#/gps/pos/halfx 10 mm
+#/gps/pos/halfy 10 mm
+#/gps/pos/halfz 3 mm
+
+# =================================================================
+
+# visualize geometry and events for debugging
+/vis/open OGLS
+
+/vis/viewer/set/autoRefresh    false
+/vis/verbose                   errors
+/vis/viewer/set/background white
+
+/vis/drawVolume
+
+
+/vis/viewer/set/lineSegmentsPerCircle 100
+
+/vis/geometry/set/visibility CaloVacuum 0 false
+/vis/geometry/set/visibility caloActiveVolume 0 false
+/vis/geometry/set/visibility shellVolume 0 false
+
+/vis/viewer/set/style surface
+/vis/viewer/set/viewpointVector -1 0 0
+/vis/viewer/set/lightsVector 1 1 -1
+
+/vis/viewer/addCutawayPlane 0 0 0 m 1 0 0
+#/vis/viewer/addCutawayPlane 0 0 0 m 0 -1 0
+#/vis/viewer/addCutawayPlane 0 0 -0.5 m 0 0 -1
+
+/vis/scene/add/axes 0 0 -1
+
+/vis/scene/add/trajectories
+
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set pi+ green
+/vis/modeling/trajectories/drawByParticleID-0/set mu+ orange
+/vis/modeling/trajectories/drawByParticleID-0/set gamma yellow
+
+/vis/filtering/trajectories/create/particleFilter
+/vis/filtering/trajectories/particleFilter-0/add nu_e
+/vis/filtering/trajectories/particleFilter-0/add nu_mu
+/vis/filtering/trajectories/particleFilter-0/add anti_nu_mu
+/vis/filtering/trajectories/particleFilter-0/invert true
+
+/vis/scene/endOfEventAction accumulate
+
+
+/vis/viewer/set/autoRefresh    true
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Start the run - to be done in interactive mode
